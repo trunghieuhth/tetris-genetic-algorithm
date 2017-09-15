@@ -1,0 +1,284 @@
+/*! LESS
+ * ================================================================/
+ *  Project:    tetris-genetic-algorithm
+ *  Version:    v2017.01 remake
+ *  Github:     https://github.com/trunghieuhth/tetris-genetic-algorithm
+ *  Author:     Hoang Trung Hieu
+ *  Website:    https://hieuht.com
+ * ================================================================/
+ */
+
+/*!
+ * COLOR CHART
+ */
+@color-bg: #242C38;
+@color-panel: #454C57;
+@color-block: #FF9326;
+@color-btn: #E5462E;
+@color-text: #FFF;
+
+/* =====================
+ * GENERAL CSS
+ * =====================
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", Roboto, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: @color-text;
+  background-color: @color-bg;
+}
+
+div.wrapper {
+  display: flex;
+  height: 100vh;
+  .title {
+    position: relative;
+    flex: 1;
+    .title-content {
+      position: absolute;
+      top: 30px;
+      left: 70px;
+      white-space: nowrap;
+      transform: rotate(270deg) translate(-100%, 0);
+      transform-origin: 0 0;
+      text-align: right;
+      letter-spacing: 5px;
+      h1 {
+        font-size: 60px;
+        font-weight: 500;
+        margin: 0;
+      }
+      p {
+        margin-top: -20px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+    .decor {
+      display: flex;
+      position: absolute;
+      left: 60px;
+      justify-content: space-between;
+      width: 70px;
+      .line {
+        width: 15px;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+      img {
+        position: absolute;
+        bottom: 30px;
+        width: 120px;
+        height: 120px;
+      }
+    }
+  }
+  .game-container {
+    display: flex;
+    flex: 3;
+    justify-content: center;
+    align-items: center;
+    .row {
+      height: 600px;
+      width: 680px;
+      display: flex;
+      .left-panel {
+        width: 180px;
+        height: 100%;
+        position: relative;
+        .next-block-area {
+          background-color: @color-panel;
+          height: 150px;
+          .next-container {
+            height: 100px;
+            #next-block {
+              display: flex;
+              margin: auto;
+            }
+          }
+        }
+        .guide {
+          position: absolute;
+          bottom: 0;
+          .guide-title {
+            text-align: center;
+            margin-bottom: 30px;
+            h3 {
+              color: #CCCCCC;
+              font-size: 12px;
+              font-weight: 500;
+            }
+          }
+          .guide-content {
+            width: 180px;
+            img {
+              width: 100%;
+            }
+          }
+        }
+      }
+      .main-panel {
+        height: 100%;
+        display: flex;
+        margin: auto;
+        #root {
+          left: 0;
+          right: 0;
+          margin: auto;
+          width: 300px;
+          height: 600px;
+          background: @color-panel url("../img/grid.png") no-repeat;
+          background-size: 300px 600px;
+        }
+      }
+      .right-panel {
+        width: 180px;
+        height: 100%;
+        position: relative;
+        .score-area {
+          background-color: @color-panel;
+          height: 120px;
+          #score {
+            padding-top: 10px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: 900;
+          }
+        }
+      }
+    }
+
+  }
+  .detail {
+    flex: 1;
+    position: relative;
+    .info {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      border: 2px solid rgba(255,255,255, .5);
+      padding: 15px;
+      p {
+        font-size: 14px;
+        font-weight: 300;
+        color: rgba(255,255,255, .5);
+      }
+      p span {
+        float: left;
+        width: 60px;
+        font-weight: 600;
+      }
+      a {
+        color: rgba(255,255,255, .5);
+      }
+    }
+  }
+}
+
+.box-title {
+  text-align: center;
+  padding-top: 10px;
+  h3 {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.button-area {
+  position: absolute;
+  bottom: 0
+}
+
+.btn {
+  display: block;
+  padding: 12px 0;
+  text-align: center;
+  width: 180px;
+  height: 50px;
+  background-color: @color-panel;
+  text-decoration: none;
+  color: @color-text;
+  margin-top: 10px;
+  &:hover {
+    background-color: @color-btn;
+    transition: all .2s;
+  }
+}
+
+.restart {
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+// MODAL
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35px;
+  height: 30px;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+}
+
+.gameover-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255, .3);
+  z-index: 50;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.7s;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 300px;
+  margin-left: -200px;
+  margin-top: -150px;
+  background: @color-bg;
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s ease-out;
+  transform: translateY(45px);
+  display: flex;
+  .caption {
+    margin: auto;
+    text-align: center;
+    h2 {
+      color: @color-btn;
+      margin-bottom: 30px;
+    }
+  }
+}
+
+.active{
+  visibility: visible;
+  opacity: 1;
+}
+
+.active + .modal{
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}

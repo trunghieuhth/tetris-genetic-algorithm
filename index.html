@@ -1,0 +1,98 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+
+</head>
+<body>
+<!--[if lt IE 8]>
+<h1>You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</h1>
+<![endif]-->
+
+<div class="wrapper">
+    <div class="title">
+        <div class="title-content">
+            <h1>TETRIS</h1>
+            <p>USING GENETIC ALGORITHM</p>
+        </div>
+        <div class="decor">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <!--<img src="assets/img/tetris.png" alt="decor">-->
+        </div>
+    </div>
+    <div class="game-container">
+        <div class="row">
+            <div class="left-panel">
+                <div class="next-block-area">
+                    <div class="box-title">
+                        <h3>NEXT</h3>
+                    </div>
+                    <div class="next-container">
+                        <canvas id="next-block" width="120px" height="120px">
+
+                        </canvas>
+                    </div>
+                </div>
+                <div class="guide">
+                    <div class="guide-title">
+                        <h3>USE THE KEYBOARD TO PLAY</h3>
+                    </div>
+                    <div class="guide-content">
+                        <img src="assets/img/keyboard.png" alt="Use the keyboard to play">
+                    </div>
+                </div>
+            </div>
+            <div class="main-panel">
+                <canvas id="root" width="300px" height="600px">
+                    <!-- GAME CANVAS -->
+                </canvas>
+            </div>
+            <div class="right-panel">
+                <div class="score-area">
+                    <div class="box-title">
+                        <h3>SCORE</h3>
+                    </div>
+                    <div id="score">
+                        0
+                    </div>
+                </div>
+                <div class="button-area">
+                    <a id="ai-button" class="btn" href="#">AI MODE</a>
+                    <a id="restart-button" class="btn" href="#">RESTART</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="detail">
+        <div class="info">
+            <p><span>Author:</span> Hoang Trung Hieu</p>
+            <p><span>GitHub:</span> <a href="https://github.com/trunghieuhth/tetris-genetic-algorithm" target="_blank">Tetris G.A</a></p>
+            <p><span>Ref:</span> <a href="https://mattmazur.com/2009/05/25/creating-a-tetrinet-bot/" target="_blank">TetriNET Bot</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="gameover-mask" role="dialog"></div>
+<div class="modal gameover" role="alert">
+    <!--<button class="close" role="button">X</button>-->
+    <div class="caption">
+        <h2>GAME OVER!</h2>
+        <a id="restart-modal-button" class="btn restart" href="#">PLAY AGAIN</a>
+    </div>
+</div>
+
+<script src="assets/js/vendor/jquery-3.2.1.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
